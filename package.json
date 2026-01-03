@@ -1,0 +1,23 @@
+{
+  "name": "social-media-news-feed-blocker",
+  "version": "1.0.0",
+  "description": "A Chrome extension that blocks the news feed on Facebook, YouTube, and LinkedIn.",
+  "main": "src/background.js",
+  "scripts": {
+    "build": "echo 'Build script not defined'",
+    "test": "echo 'Test script not defined'"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "facebook",
+    "youtube",
+    "linkedin",
+    "news feed",
+    "blocker"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
