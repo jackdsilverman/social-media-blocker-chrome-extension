@@ -21,22 +21,54 @@ function hideYouTubeContent() {
         homeFeed.style.display = 'none'; // Hides the YouTube home feed
     }
 
-    const shorts = Array.from(document.querySelectorAll('#endpoint')).find(
+    const shorts = Array.from(document.querySelectorAll('#endpoint')).filter(
         (el) => el.textContent.trim() === 'Shorts'
     );
-    if (shorts) {
-        const shortsSection = shorts.closest('ytd-rich-section-renderer');
+    shorts.forEach((short) => {
+        const shortsSection = short.closest('ytd-rich-section-renderer');
         if (shortsSection) {
-            shortsSection.style.display = 'none'; // Hides YouTube Shorts section
+            shortsSection.style.display = 'none';
         }
-    }
+    });
 
-    const shortsTab = Array.from(document.querySelectorAll('#endpoint')).find(
+    const shortsTabs = Array.from(document.querySelectorAll('#endpoint')).filter(
         (el) => el.textContent.trim() === 'Shorts'
     );
-    if (shortsTab) {
-        shortsTab.style.display = 'none'; // Hides the Shorts tab in the navigation bar
-    }
+    shortsTabs.forEach((shortsTab) => {
+        const shortsTabSection = shortsTab.closest('ytd-mini-guide-entry-renderer') ||
+            shortsTab.closest('ytd-guide-entry-renderer');
+        if (shortsTabSection) {
+            shortsTabSection.style.display = 'none';
+        }
+    });
+
+    const miniGuideEntries = document.querySelectorAll('ytd-mini-guide-entry-renderer');
+    miniGuideEntries.forEach((entry) => {
+        if (entry.getAttribute('aria-label') === 'Shorts' || entry.textContent.includes('Shorts')) {
+            entry.style.display = 'none';
+        }
+    });
+
+    const dismissables = document.querySelectorAll('#dismissible');
+    dismissables.forEach((dismissable) => {
+        if (dismissable.textContent.includes('Shorts')) {
+            dismissable.style.display = 'none';
+        }
+    });
+
+    const shortsItems = document.querySelectorAll('#items');
+    shortsItems.forEach((item) => {
+        if (item.textContent.includes('Shorts')) {
+            item.style.display = 'none';
+        }
+    });
+
+    const contents = document.querySelectorAll('#contents');
+    contents.forEach((item) => {
+        if (item.textContent.includes('Shorts')) {
+            item.style.display = 'none';
+        }
+    });
 
     const ads = document.querySelectorAll('ytd-ad-slot-renderer, .ytp-ad-module');
     ads.forEach((ad) => {
@@ -44,12 +76,6 @@ function hideYouTubeContent() {
     });
 }
 
-function hideLinkedInContent() {
-    const feed = document.querySelector('.scaffold-finite-scroll__content');
-    if (feed) {
-        feed.style.display = 'none'; // Hides the LinkedIn feed
-    }
-}
 
 // Use MutationObserver to monitor DOM changes
 const observer = new MutationObserver(() => {
@@ -59,8 +85,6 @@ const observer = new MutationObserver(() => {
         hideFacebookContent();
     } else if (url.includes('youtube.com')) {
         hideYouTubeContent();
-    } else if (url.includes('linkedin.com')) {
-        hideLinkedInContent();
     }
 });
 
