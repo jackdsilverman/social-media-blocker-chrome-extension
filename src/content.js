@@ -44,6 +44,15 @@ function hideYouTubeContent() {
         document.querySelectorAll("video").forEach(vid => vid.pause());
     }
 
+    const collapsedShortsTab = document.querySelector('.ytd-mini-guide-entry-renderer[aria-label="Shorts"]');
+    if (collapsedShortsTab) {
+        collapsedShortsTab.style.display = 'none'; // Hides the Shorts tab in the sidebar
+    }
+
+    const sidebarSuggestions = document.querySelector('#related');
+    if (sidebarSuggestions) {
+        sidebarSuggestions.style.display = 'none'; // Hides the sidebar suggestions
+    }
 }
 
 
