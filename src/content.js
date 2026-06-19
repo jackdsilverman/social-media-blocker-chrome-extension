@@ -38,6 +38,12 @@ function hideYouTubeContent() {
         short.style.display = 'none'; // Hides YouTube Shorts
     });
 
+    const shortVideo = document.querySelector('#shorts-container');
+    if (shortVideo) {
+        shortVideo.style.display = 'none'; // Hides YouTube Shorts on the video page
+        document.querySelectorAll("video").forEach(vid => vid.pause());
+    }
+
 }
 
 
