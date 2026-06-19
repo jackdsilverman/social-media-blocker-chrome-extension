@@ -16,20 +16,11 @@ function hideFacebookContent() {
 }
 
 function hideYouTubeContent() {
-    const homeFeed = document.getElementById('contents');
-    if (homeFeed) {
+    const currentUrl = window.location.href;
+    const homeFeed = document.getElementById('primary');
+    if (currentUrl === ('https://www.youtube.com/') && homeFeed) {
         homeFeed.style.display = 'none'; // Hides the YouTube home feed
     }
-
-    const shorts = Array.from(document.querySelectorAll('#endpoint')).filter(
-        (el) => el.textContent.trim() === 'Shorts'
-    );
-    shorts.forEach((short) => {
-        const shortsSection = short.closest('ytd-rich-section-renderer');
-        if (shortsSection) {
-            shortsSection.style.display = 'none';
-        }
-    });
 
     const shortsTabs = Array.from(document.querySelectorAll('#endpoint')).filter(
         (el) => el.textContent.trim() === 'Shorts'
@@ -42,38 +33,11 @@ function hideYouTubeContent() {
         }
     });
 
-    const miniGuideEntries = document.querySelectorAll('ytd-mini-guide-entry-renderer');
-    miniGuideEntries.forEach((entry) => {
-        if (entry.getAttribute('aria-label') === 'Shorts' || entry.textContent.includes('Shorts')) {
-            entry.style.display = 'none';
-        }
+    const shorts = document.querySelectorAll('ytm-shorts-lockup-view-model-v2')
+    shorts.forEach((short) => {
+        short.style.display = 'none'; // Hides YouTube Shorts
     });
 
-    const dismissables = document.querySelectorAll('#dismissible');
-    dismissables.forEach((dismissable) => {
-        if (dismissable.textContent.includes('Shorts')) {
-            dismissable.style.display = 'none';
-        }
-    });
-
-    const shortsItems = document.querySelectorAll('#items');
-    shortsItems.forEach((item) => {
-        if (item.textContent.includes('Shorts')) {
-            item.style.display = 'none';
-        }
-    });
-
-    const contents = document.querySelectorAll('#contents');
-    contents.forEach((item) => {
-        if (item.textContent.includes('Shorts')) {
-            item.style.display = 'none';
-        }
-    });
-
-    const ads = document.querySelectorAll('ytd-ad-slot-renderer, .ytp-ad-module');
-    ads.forEach((ad) => {
-        ad.style.display = 'none'; // Hides YouTube Ads
-    });
 }
 
 
